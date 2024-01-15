@@ -5,6 +5,7 @@ import Questions from "./Questions";
 import Loader from "./Loader";
 import Error from "./Error";
 import StartScreen from "./StartScreen";
+import Question from "./Question";
 
 function App() {
   const initialState = {
@@ -29,6 +30,13 @@ function App() {
         status: "error",
       };
     }
+
+    if (action.type === "start") {
+      return {
+        ...state,
+        status: "active",
+      };
+    }
   }
   const [state, dispatch] = useReducer(reducer, initialState);
   const { questions, status } = state;
@@ -43,11 +51,17 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <StartScreen numberOfQuestions={numberOfQuestions} />
+
       <Main>
         {status === "loading" && <Loader />}
-        {status === "ready" && <Questions questions={questions} />}
+        {status === "ready" && (
+          <StartScreen
+            numberOfQuestions={numberOfQuestions}
+            dispatch={dispatch}
+          />
+        )}
         {status === "error" && <Error />}
+        {status === "active" && <Question />}
       </Main>
     </div>
   );
