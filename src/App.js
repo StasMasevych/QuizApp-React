@@ -10,6 +10,7 @@ import Question from "./Question";
 function App() {
   const initialState = {
     questions: [],
+    index: 0,
 
     //"loading", "error", "ready", "active", "finished"
     status: "loading",
@@ -37,9 +38,17 @@ function App() {
         status: "active",
       };
     }
+
+    if (action.type === "nextQuestion") {
+      return {
+        ...state,
+        index: state.index + 1,
+      };
+    }
   }
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { questions, status } = state;
+  const { questions, status, index } = state;
+
   const numberOfQuestions = questions.length;
   /* console.log(questions); */
   useEffect(function () {
@@ -61,7 +70,9 @@ function App() {
           />
         )}
         {status === "error" && <Error />}
-        {status === "active" && <Question />}
+        {status === "active" && (
+          <Question question={questions[index]} dispatch={dispatch} />
+        )}
       </Main>
     </div>
   );
