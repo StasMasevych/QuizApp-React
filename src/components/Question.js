@@ -1,4 +1,5 @@
 import React from "react";
+import Options from "./Options";
 
 function Question({ question, dispatch }) {
   console.log(question);
@@ -8,11 +9,7 @@ function Question({ question, dispatch }) {
   return (
     <div>
       <h4>{question.question}</h4>
-      <div className="options">
-        {question.options.map((el) => {
-          return <button className="btn btn-option">{el}</button>;
-        })}
-      </div>
+      <Options question={question} />
       <button className="btn btn-ui" onClick={moveNextHandler}>
         Next
       </button>
