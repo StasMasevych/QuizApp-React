@@ -49,9 +49,18 @@ function App() {
     }
 
     if (action.type === "answer") {
+      //find current question
+      const question = state.questions[state.index];
+      console.log("question", question);
       return {
         ...state,
         answer: action.payload,
+        //check if current question is correct
+        //check whether clicked question by index match with correct property
+        points:
+          action.payload === question.correctOption
+            ? state.points + question.points
+            : state.pints,
       };
     }
   }
