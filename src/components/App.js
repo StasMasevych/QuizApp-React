@@ -45,6 +45,7 @@ function App() {
       return {
         ...state,
         index: state.index + 1,
+        answer: null,
       };
     }
 
