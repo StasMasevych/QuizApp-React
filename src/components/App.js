@@ -11,6 +11,8 @@ function App() {
   const initialState = {
     questions: [],
     index: 0,
+    answer: null,
+    points: 0,
 
     //"loading", "error", "ready", "active", "finished"
     status: "loading",
@@ -45,9 +47,16 @@ function App() {
         index: state.index + 1,
       };
     }
+
+    if (action.type === "answer") {
+      return {
+        ...state,
+        answer: action.payload,
+      };
+    }
   }
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { questions, status, index } = state;
+  const { questions, status, index, answer } = state;
 
   const numberOfQuestions = questions.length;
   /* console.log(questions); */
@@ -71,7 +80,11 @@ function App() {
         )}
         {status === "error" && <Error />}
         {status === "active" && (
-          <Question question={questions[index]} dispatch={dispatch} />
+          <Question
+            question={questions[index]}
+            dispatch={dispatch}
+            answer={answer}
+          />
         )}
       </Main>
     </div>
