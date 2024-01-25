@@ -16,6 +16,7 @@ function App() {
     index: 0,
     answer: null,
     points: 0,
+    highscore: 0,
 
     //"loading", "error", "ready", "active", "finished"
     status: "loading",
@@ -55,7 +56,19 @@ function App() {
     if (action.type === "finish") {
       return {
         ...state,
+        highscore:
+          state.points > state.highscore ? state.points : state.highscore,
         status: "finished",
+      };
+    }
+
+    if (action.type === "restart") {
+      return {
+        ...state,
+        index: 0,
+        answer: null,
+        points: 0,
+        status: "active",
       };
     }
 
@@ -76,7 +89,7 @@ function App() {
     }
   }
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { questions, status, index, answer, points } = state;
+  const { questions, status, index, answer, points, highscore } = state;
 
   const numberOfQuestions = questions.length;
 
@@ -126,7 +139,12 @@ function App() {
           </>
         )}
         {status === "finished" && (
-          <FinishedScreen points={points} maximumPoints={maximumPoints} />
+          <FinishedScreen
+            points={points}
+            maximumPoints={maximumPoints}
+            highscore={highscore}
+            dispatch={dispatch}
+          />
         )}
       </Main>
     </div>
