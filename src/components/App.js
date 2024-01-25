@@ -8,6 +8,7 @@ import StartScreen from "./StartScreen";
 import Question from "./Question";
 import Progress from "./Progress";
 import NextButton from "./NextButton";
+import FinishedScreen from "./FinishedScreen";
 
 function App() {
   const initialState = {
@@ -51,6 +52,13 @@ function App() {
       };
     }
 
+    if (action.type === "finish") {
+      return {
+        ...state,
+        status: "finished",
+      };
+    }
+
     if (action.type === "answer") {
       //find current question
       const question = state.questions[state.index];
@@ -71,6 +79,7 @@ function App() {
   const { questions, status, index, answer, points } = state;
 
   const numberOfQuestions = questions.length;
+
   const maximumPoints = questions.reduce((acc, val) => acc + val.points, 0);
 
   /* console.log(maximumPoints); */
@@ -108,8 +117,16 @@ function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton answer={answer} dispatch={dispatch} />
+            <NextButton
+              answer={answer}
+              dispatch={dispatch}
+              index={index}
+              numberOfQuestions={numberOfQuestions}
+            />
           </>
+        )}
+        {status === "finished" && (
+          <FinishedScreen points={points} maximumPoints={maximumPoints} />
         )}
       </Main>
     </div>
