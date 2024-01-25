@@ -64,11 +64,11 @@ function App() {
 
     if (action.type === "restart") {
       return {
-        ...state,
+        ...state, //fetched questions
         index: 0,
         answer: null,
         points: 0,
-        status: "active",
+        status: "ready",
       };
     }
 
