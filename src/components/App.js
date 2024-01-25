@@ -71,7 +71,7 @@ function App() {
         points:
           action.payload === question.correctOption
             ? state.points + question.points
-            : state.pints,
+            : state.points,
       };
     }
   }
