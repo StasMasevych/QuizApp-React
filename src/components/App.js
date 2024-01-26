@@ -9,6 +9,8 @@ import Question from "./Question";
 import Progress from "./Progress";
 import NextButton from "./NextButton";
 import FinishedScreen from "./FinishedScreen";
+import Footer from "./Footer";
+import Timer from "./Timer";
 
 function App() {
   const initialState = {
@@ -17,6 +19,7 @@ function App() {
     answer: null,
     points: 0,
     highscore: 0,
+    secondsRemaining: 10,
 
     //"loading", "error", "ready", "active", "finished"
     status: "loading",
@@ -87,9 +90,25 @@ function App() {
             : state.points,
       };
     }
+
+    if (action.type === "tick") {
+      return {
+        ...state,
+        secondsRemaining: state.secondsRemaining - 1,
+        status: state.secondsRemaining === 0 ? "finished" : state.status,
+      };
+    }
   }
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { questions, status, index, answer, points, highscore } = state;
+  const {
+    questions,
+    status,
+    index,
+    answer,
+    points,
+    highscore,
+    secondsRemaining,
+  } = state;
 
   const numberOfQuestions = questions.length;
 
@@ -130,12 +149,15 @@ function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton
-              answer={answer}
-              dispatch={dispatch}
-              index={index}
-              numberOfQuestions={numberOfQuestions}
-            />
+            <Footer>
+              <Timer dispatch={dispatch} secondsRemaining={secondsRemaining} />
+              <NextButton
+                answer={answer}
+                dispatch={dispatch}
+                index={index}
+                numberOfQuestions={numberOfQuestions}
+              />
+            </Footer>
           </>
         )}
         {status === "finished" && (
