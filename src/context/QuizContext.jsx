@@ -111,10 +111,13 @@ function QuizProvider({ children }) {
 
   const maximumPoints = questions.reduce((acc, val) => acc + val.points, 0);
 
+  const question = questions[index];
+
   return (
     <QuizContext.Provider
       value={{
         questions,
+        question,
         index,
         answer,
         points,

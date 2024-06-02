@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import Header from "./Header";
 import Main from "./Main";
-import Questions from "./Questions";
+
 import Loader from "./Loader";
 import Error from "./Error";
 import StartScreen from "./StartScreen";
@@ -15,16 +15,7 @@ import Timer from "./Timer";
 import { useQuizze } from "../context/QuizContext";
 
 function App() {
-  const {
-    questions,
-    index,
-    answer,
-    points,
-    highscore,
-    secondsRemaining,
-    status,
-    dispatch,
-  } = useQuizze();
+  const { status, dispatch } = useQuizze();
 
   /* console.log(maximumPoints); */
   /* console.log(questions); */

@@ -3,12 +3,16 @@ import Options from "./Options";
 import { useQuizze } from "../context/QuizContext";
 
 function Question() {
-  const { question, dispatch, answer } = useQuizze();
+  const { questions, index } = useQuizze();
+
+  const question = questions[index];
+
+  console.log("Data in Question component", question);
 
   return (
     <div>
       <h4>{question.question}</h4>
-      <Options question={question} dispatch={dispatch} answer={answer} />
+      <Options question={question} />
     </div>
   );
 }
