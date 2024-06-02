@@ -1,9 +1,8 @@
 import React from "react";
 import Options from "./Options";
-import { useQuizze } from "../context/QuizContext";
 
-function Question() {
-  const { question, dispatch, answer } = useQuizze();
+function Question({ question, dispatch, answer }) {
+  /* console.log(question); */
 
   return (
     <div>

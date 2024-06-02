@@ -1,9 +1,6 @@
 import React from "react";
-import { useQuizze } from "../context/QuizContext";
 
-function NextButton() {
-  const { answer, dispatch, index, numberOfQuestions } = useQuizze();
-
+function NextButton({ answer, dispatch, index, numberOfQuestions }) {
   function moveNextHandler() {
     dispatch({ type: "nextQuestion" });
   }

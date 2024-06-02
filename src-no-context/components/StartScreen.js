@@ -1,9 +1,6 @@
 import React from "react";
-import { useQuizze } from "../context/QuizContext";
 
-function StartScreen() {
-  const { dispatch, numberOfQuestions } = useQuizze();
-
+function StartScreen({ numberOfQuestions, dispatch }) {
   function startHandler() {
     dispatch({ type: "start" });
   }

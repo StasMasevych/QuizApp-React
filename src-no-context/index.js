@@ -3,11 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App";
 
-import { QuizProvider } from "./context/QuizContext";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <QuizProvider>
+  <React.StrictMode>
     <App />
-  </QuizProvider>
+  </React.StrictMode>
 );

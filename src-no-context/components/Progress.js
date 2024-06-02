@@ -1,10 +1,6 @@
 import React from "react";
-import { useQuizze } from "../context/QuizContext";
 
-function Progress() {
-  const { index, numberOfQuestions, points, maximumPoints, answer } =
-    useQuizze();
-
+function Progress({ index, numberOfQuestions, points, maximumPoints, answer }) {
   return (
     <section className="progress">
       <progress
